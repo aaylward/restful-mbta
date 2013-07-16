@@ -5,9 +5,13 @@ module.exports = (grunt) ->
       compile:
         options:
           bare: true
-        files:
-          'public/dist/mbta.js': 'src/*.coffee'
-          'public/test/test.js': 'test/*.coffee'
+        files: [
+          src  : 'src/mbta.coffee'
+          dest : 'public/dist/mbta.js'
+        ,
+          src  : 'src/lib/parsers.coffee'
+          dest : 'public/dist/lib/parsers.js'
+        ]
     watch:
       scripts:
         files: '**/*.coffee'

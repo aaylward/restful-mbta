@@ -1,23 +1,10 @@
 Q = require 'q'
 request = require 'request'
+Parsers = require './lib/parsers'
 
 class MBTA
   constructor: (@key) ->
     @apiUrl = 'http://realtime.mbta.com/developer/api/v1/'
-
-  _parseRoutes: (routesResponse) ->
-    routeList = []
-    for routeType in routesResponse.mode
-      fatRoutes = routeType.route.map (route) ->
-        route.route_type = routeType.route_type
-        route.mode_name = routeType.mode_name
-        route
-      routeList = routeList.concat(fatRoutes)
-
-    routeList
-
-  _parse:
-    routes: @_parseRoutes
 
   buildOptions: (path, qsOpts) ->
     (
@@ -35,7 +22,7 @@ class MBTA
     request.get opts, (e,r,body) =>
 
       return deferred.reject e if e
-      deferred.resolve @_parse[type]?(body) or body
+      deferred.resolve Parsers[type]?(body) or body
 
     deferred.promise
 
