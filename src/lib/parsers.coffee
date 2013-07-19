@@ -11,7 +11,6 @@ routes = (routesResponse) ->
 
 servertime = (timeResponse) ->
   time: timeResponse.server_dt
-  # Good for a value response, but might be better to leave as an object (with better naming?)
 
 routesbystop = (routesResponse) ->
   routeObj =
