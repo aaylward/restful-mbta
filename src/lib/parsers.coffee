@@ -26,37 +26,34 @@ routesbystop = (routesResponse) ->
   routeObj
 
 stopsbyroute = (stopsResponse) ->
-  stopsObj = stopsResponse.direction
-
-  stopsObj
+  stopsResponse.direction
 
 stopsbylocation = (stopsResponse) ->
-  stopsObj = stopsResponse.stop
-
-  stopsObj
+  stopsResponse.stop
 
 schedulebystop = (scheduleRes) ->
-  schedule =
+  {
     stop_id: scheduleRes.stop_id
     stop_name: scheduleRes.stop_name
     routes: scheduleRes.mode
+  }
 
 schedulebyroute = (scheduleRes) ->
-  schedules = scheduleRes.direction.map (sched) ->
+  scheduleRes.direction.map (sched) ->
     sched.route_id = scheduleRes.route_id
     sched.route_name = scheduleRes.route_name
     sched
 
-  schedules
-
 schedulebytrip = (scheduleRes) ->
   #potentially doesn't need parsing?
+  scheduleRes
 
 alerts = (alertsRes) ->
   alertsRes.alerts
 
 alertbyid = (alertRes) ->
   # Seems well-organized.
+  alertRes
 
 alertheadersbyroute = (headersRes) ->
   headersRes.alert_headers
